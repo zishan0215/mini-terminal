@@ -16,8 +16,11 @@ class FileManager:
         '''
         Function to copy file from source to target
         Leave the target blank or put a dot (".") to create a file with the same name as the source
-        :param source: any existing file path (eg. "foo.py", "/home/user/bar.txt")
-        :param target: name of the target file (or path to target file) (eg. "bar.py", "/home/user/foo.txt")
+        Eg.
+            copyfile foo.txt bar.txt
+            copyfile some/place/foo.txt to/some/other/place/
+        :param source: string
+        :param target: string
         :return: 1 for success and -1 for error
         '''
 
@@ -89,8 +92,8 @@ class FileManager:
             copydir("foo/baz","foo/bar")
             copydir("baz", ".")
             copydir("foo", "bar/foo")
-        :param source:
-        :param target:
+        :param source: string
+        :param target: string
         :return: 1 for succuss, -1 for failure
         '''
 
@@ -212,6 +215,12 @@ class FileManager:
         return 1
 
     def movefile(self, source, target):
+        '''
+        Move file
+        :param source: string
+        :param target: string
+        :return: 1 for success
+        '''
 
         if not os.path.exists(source):
             print("movefile: cannot move '" + source + "': no such file")
@@ -253,6 +262,13 @@ class FileManager:
         return 1
 
     def movedir(self, source, target):
+        '''
+        Move Directory including subdirectories
+        :param source: string
+        :param target: string
+        :return: 1 for success
+        '''
+
         if not os.path.exists(source):
             print("movedir: cannot move '" + source + "': no such directory")
             return -1
@@ -294,6 +310,12 @@ class FileManager:
         return 1
 
     def rmfile(self, source):
+        '''
+        Delete file
+        :param source: string
+        :return: 1 for success
+        '''
+
         if not os.path.exists(source):
             print("deletefile: cannot delete '" + source + "': no such file")
             return -1
@@ -301,6 +323,11 @@ class FileManager:
         return 1
 
     def rmdir(self, source):
+        '''
+        Delete directory using stack
+        :param source: string
+        :return: 1 for success
+        '''
         stack = []
         for root, dirs, files in os.walk(source):
             for file in files:

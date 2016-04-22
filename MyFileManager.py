@@ -210,10 +210,48 @@ class FileManager:
                 if not os.path.exists(path+'/'+dir):
                     os.mkdir(path+'/'+dir)
 
-        print("copied successfully")
+        return 1
 
     def movefile(self, source, target):
-        pass
+
+        if not os.path.exists(source):
+            print("movefile: cannot move '" + source + "': no such file")
+            return -1
+
+        if os.path.isdir(source):
+            print("Source is a directory. Use movedir instead")
+            return -1
+
+        # get base and path of source
+        index = source.rfind('/')
+        if index == len(source)-1:
+            index = source.rfind('/')
+        if index == -1:
+            self.sname = source
+            self.spath = ""
+        else:
+            self.sname = source[index+1:]
+            self.spath = source[:index]
+
+        # get base and path of target
+        index = target.rfind('/')
+        if index == len(target)-1:
+            index = target.rfind('/')
+        if index == -1:
+            self.tname = target
+            self.tpath = ""
+        else:
+            self.tname = target[index+1:]
+            self.tpath = target[:index]
+
+        if self.spath == self.tpath:
+            # same path. just rename
+            os.rename(source, target)
+        else:
+            self.copyfile(source, target)
+            os.remove(source)
+
+        return 1
 
     def movedir(self, source, target):
         pass

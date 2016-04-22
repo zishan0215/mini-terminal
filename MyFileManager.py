@@ -289,18 +289,18 @@ class FileManager:
             print('renaming')
         else:
             self.copydir(source, target)
-            self.deletedir(source)
+            self.rmdir(source)
 
         return 1
 
-    def deletefile(self, source):
+    def rmfile(self, source):
         if not os.path.exists(source):
             print("deletefile: cannot delete '" + source + "': no such file")
             return -1
         os.remove(source)
         return 1
 
-    def deletedir(self, source):
+    def rmdir(self, source):
         stack = []
         for root, dirs, files in os.walk(source):
             for file in files:

@@ -289,7 +289,7 @@ class FileManager:
             print('renaming')
         else:
             self.copydir(source, target)
-            # os.rmdir(source)
+            self.deletedir(source)
 
         return 1
 

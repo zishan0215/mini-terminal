@@ -84,7 +84,7 @@ class FileManager:
 
     def copydir(self, source, target):
         '''
-        A recursive routine to copy directories including sub directories
+        A routine to copy directories including sub directories
         Eg.:
             copydir("foo", "bar")
             copydir("foo/baz","foo/bar")

@@ -103,7 +103,7 @@ class FileManager:
             return -1
 
         # check if base target directory exists
-        index = target.find('/')
+        index = target.rfind('/')
         if index == len(target) - 1:
             index = target.rfind('/', 0, index-1)
         if index != -1:

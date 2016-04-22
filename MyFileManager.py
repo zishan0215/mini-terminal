@@ -79,7 +79,6 @@ class FileManager:
         tfptr.write(sfcontent)
         tfptr.close()
 
-        print("copied successfully")
         return 1
 
     def copydir(self, source, target):
@@ -254,10 +253,49 @@ class FileManager:
         return 1
 
     def movedir(self, source, target):
-        pass
+        if not os.path.exists(source):
+            print("movedir: cannot move '" + source + "': no such directory")
+            return -1
+
+        if not os.path.isdir(source):
+            print("Source is a file. Use movefile instead")
+            return -1
+
+        # get base and path of source
+        index = source.rfind('/')
+        if index == len(source)-1:
+            index = source.rfind('/')
+        if index == -1:
+            self.sname = source
+            self.spath = ""
+        else:
+            self.sname = source[index+1:]
+            self.spath = source[:index]
+
+        # get base and path of target
+        index = target.rfind('/')
+        if index == len(target)-1:
+            index = target.rfind('/')
+        if index == -1:
+            self.tname = target
+            self.tpath = ""
+        else:
+            self.tname = target[index+1:]
+            self.tpath = target[:index]
+
+        if self.spath == self.tpath:
+            # same path. just rename
+            os.rename(source, target)
+            print('renaming')
+        else:
+            self.copydir(source, target)
+            # os.rmdir(source)
+
+        return 1
 
     def deletefile(self, source):
-        pass
+        if not os.path.exists(source):
+            print()
 
     def deletedir(self, source):
         pass

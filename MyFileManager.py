@@ -295,7 +295,24 @@ class FileManager:
 
     def deletefile(self, source):
         if not os.path.exists(source):
-            print()
+            print("deletefile: cannot delete '" + source + "': no such file")
+            return -1
+        os.remove(source)
+        return 1
 
     def deletedir(self, source):
-        pass
+        stack = []
+        for root, dirs, files in os.walk(source):
+            for file in files:
+                os.remove(root+'/'+file)
+
+            for sdir in dirs:
+                # print('path:', root+'/'+sdir)
+                stack.append(root+'/'+sdir)
+
+        while len(stack) > 0:
+            path = stack.pop()
+            os.rmdir(path)
+
+        os.rmdir(source)
+        return 1

@@ -26,7 +26,6 @@ if __name__ == '__main__':
             help()
         else:
             lcom = com.split()
-            print(lcom)
             if lcom[0] == "copyfile":
                 fm.copyfile(lcom[1], lcom[2])
             elif lcom[0] == "copydir":
@@ -39,6 +38,8 @@ if __name__ == '__main__':
                 fm.rmfile(lcom[1])
             elif lcom[0] == "rmdir":
                 fm.rmdir(lcom[1])
+            else:
+                print("This command is not supported. Type 'help' to see a list of commands")
 
     print("Thank you for using Zishan's Terminal")
     # fm.copyfile("main.py", "test/abc.txt")

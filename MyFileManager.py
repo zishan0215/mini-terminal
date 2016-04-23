@@ -75,10 +75,10 @@ class FileManager:
 
         self.spath = source
 
-        sfptr = open(self.spath, 'r')
+        sfptr = open(self.spath, 'rb')
         sfcontent = sfptr.read()
         sfptr.close()
-        tfptr = open(self.tpath, 'w')
+        tfptr = open(self.tpath, 'wb')
         tfptr.write(sfcontent)
         tfptr.close()
 
@@ -199,12 +199,12 @@ class FileManager:
             # print('root:', root)
 
             for file in files:
-                fptr = open(root+file, 'r')
+                fptr = open(root+file, 'rb')
                 tfile = fptr.read()
                 fptr.close()
 
                 # print(path+file)
-                fptr = open(path+file, 'w')
+                fptr = open(path+file, 'wb')
                 fptr.write(tfile)
                 fptr.close()
 
@@ -302,7 +302,7 @@ class FileManager:
         if self.spath == self.tpath:
             # same path. just rename
             os.rename(source, target)
-            print('renaming')
+            # print('renaming')
         else:
             self.copydir(source, target)
             self.rmdir(source)

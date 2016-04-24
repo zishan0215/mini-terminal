@@ -1,5 +1,5 @@
 # A mini-terminal
-A basic terminal implemented in python.
+A basic terminal implemented in python 3.
 Following commands are supported:
 * ​`copyfile​ <source_file_path> <destination_file_path>`
 * ​`copydir <source_directory_path> <destination_directory_path>` 
